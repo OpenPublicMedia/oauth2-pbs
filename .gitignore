@@ -1,0 +1,13 @@
+# Build
+/build/
+
+# Composer
+composer.phar
+composer.lock
+/vendor/
+
+# IDE
+/.idea/
+
+# MacOS
+.DS_Store
