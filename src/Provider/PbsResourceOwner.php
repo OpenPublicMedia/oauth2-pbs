@@ -67,6 +67,30 @@ class PbsResourceOwner implements ResourceOwnerInterface
     }
 
     /**
+     * Get resource owner full name.
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        $first_name = $this->getFirstName();
+        $last_name = $this->getLastName();
+
+        $name = '';
+        if (!empty($first_name) && !empty($last_name)) {
+            $name = $first_name . ' ' . $last_name;
+        }
+        elseif (!empty($last_name)) {
+            $name = $last_name;
+        }
+        elseif (!empty($first_name)) {
+            $name = $first_name;
+        }
+
+        return $name;
+    }
+
+    /**
      * Get resource owner analytics ID.
      *
      * @return string|null
