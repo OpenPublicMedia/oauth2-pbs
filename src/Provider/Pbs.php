@@ -38,7 +38,7 @@ class Pbs extends AbstractProvider
      */
     public function getBaseAccessTokenUrl(array $params)
     {
-        return $this->domain . '/oauth2/token';
+        return $this->domain . '/oauth2/token/';
     }
 
     /**
@@ -50,7 +50,7 @@ class Pbs extends AbstractProvider
      */
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        return $this->domain . '/oauth2/user/info';
+        return $this->domain . '/oauth2/user/info/';
     }
 
     /**
