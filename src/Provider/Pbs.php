@@ -13,7 +13,14 @@ class Pbs extends AbstractProvider
     use BearerAuthorizationTrait;
 
     /**
-     * Domain
+     * {@inheritDoc}
+     *
+     * @see \League\OAuth2\Client\Provider\AbstractProvider::ACCESS_TOKEN_RESOURCE_OWNER_ID
+     */
+    const ACCESS_TOKEN_RESOURCE_OWNER_ID = 'pid';
+
+    /**
+     * Domain.
      *
      * @var string
      */
@@ -95,7 +102,6 @@ class Pbs extends AbstractProvider
      */
     protected function createResourceOwner(array $response, AccessToken $token)
     {
-        $user = new PbsResourceOwner($response);
-        return $user;
+        return new PbsResourceOwner($response);
     }
 }
