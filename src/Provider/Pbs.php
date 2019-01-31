@@ -97,7 +97,6 @@ class Pbs extends AbstractProvider
     protected function createResourceOwner(array $response, AccessToken $token)
     {
         $user = new PbsResourceOwner($response);
-
-        return $user->setDomain($this->domain);
+        return $user;
     }
 }
