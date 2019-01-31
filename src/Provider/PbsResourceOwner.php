@@ -10,7 +10,7 @@ class PbsResourceOwner implements ResourceOwnerInterface
     use ArrayAccessorTrait;
 
     /**
-     * Raw response
+     * Raw response.
      *
      * @var array
      */
@@ -27,7 +27,7 @@ class PbsResourceOwner implements ResourceOwnerInterface
     }
 
     /**
-     * Get resource owner id
+     * Get resource owner ID.
      *
      * @return string|null
      */
@@ -37,7 +37,7 @@ class PbsResourceOwner implements ResourceOwnerInterface
     }
 
     /**
-     * Get resource owner email
+     * Get resource owner email.
      *
      * @return string|null
      */
@@ -47,7 +47,7 @@ class PbsResourceOwner implements ResourceOwnerInterface
     }
 
     /**
-     * Get resource owner first name
+     * Get resource owner first name.
      *
      * @return string|null
      */
@@ -57,7 +57,7 @@ class PbsResourceOwner implements ResourceOwnerInterface
     }
 
     /**
-     * Get resource owner last name
+     * Get resource owner last name.
      *
      * @return string|null
      */
@@ -79,11 +79,9 @@ class PbsResourceOwner implements ResourceOwnerInterface
         $name = '';
         if (!empty($first_name) && !empty($last_name)) {
             $name = $first_name . ' ' . $last_name;
-        }
-        elseif (!empty($last_name)) {
+        } elseif (!empty($last_name)) {
             $name = $last_name;
-        }
-        elseif (!empty($first_name)) {
+        } elseif (!empty($first_name)) {
             $name = $first_name;
         }
 
@@ -125,8 +123,7 @@ class PbsResourceOwner implements ResourceOwnerInterface
 
         if (!$vppa_accepted) {
             $vppa_status = 'rejected';
-        }
-        elseif (!empty($vppa_last_updated)) {
+        } elseif (!empty($vppa_last_updated)) {
             $vppa_status = 'valid';
 
             if (strtotime($vppa_last_updated) < strtotime('-2 years')) {

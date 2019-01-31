@@ -20,7 +20,7 @@ class Pbs extends AbstractProvider
     public $domain = 'https://account.pbs.org';
 
     /**
-     * Get authorization url to begin OAuth flow
+     * Get authorization url to begin OAuth flow.
      *
      * @return string
      */
@@ -30,7 +30,7 @@ class Pbs extends AbstractProvider
     }
 
     /**
-     * Get access token url to retrieve token
+     * Get access token url to retrieve token.
      *
      * @param  array $params
      *
@@ -42,7 +42,7 @@ class Pbs extends AbstractProvider
     }
 
     /**
-     * Get provider url to fetch user details
+     * Get provider url to fetch user details.
      *
      * @param  AccessToken $token
      *
@@ -81,8 +81,7 @@ class Pbs extends AbstractProvider
     {
         if ($response->getStatusCode() >= 400) {
             throw PbsIdentityProviderException::clientException($response, $data);
-        }
-        elseif (isset($data['error'])) {
+        } elseif (isset($data['error'])) {
             throw PbsIdentityProviderException::oauthException($response, $data);
         }
     }
