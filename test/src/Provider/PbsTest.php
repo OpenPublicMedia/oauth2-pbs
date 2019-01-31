@@ -60,7 +60,7 @@ class PbsTest extends \PHPUnit_Framework_TestCase
         $url = $this->provider->getBaseAccessTokenUrl($params);
         $uri = parse_url($url);
 
-        $this->assertEquals('/oauth2/token', $uri['path']);
+        $this->assertEquals('/oauth2/token/', $uri['path']);
     }
 
     public function testGetAccessToken()
