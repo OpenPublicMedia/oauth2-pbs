@@ -7,17 +7,17 @@ This package provides PBS OAuth 2.0 support for the PHP League's [OAuth 2.0 Clie
 To install, use composer:
 
 ```
-composer require cascadepublicmedia/oauth2-pbs
+composer require openpublicmedia/oauth2-pbs
 ```
 
 ## Usage
 
-Usage is the same as The League's OAuth client, using `\CascadePublicMedia\OAuth2\Client\Provider\Pbs` as the provider.
+Usage is the same as The League's OAuth client, using `OpenPublicMedia\OAuth2\Client\Provider\Pbs` as the provider.
 
 ### Authorization Code Flow
 
 ```php
-$provider = new CascadePublicMedia\OAuth2\Client\Provider\Pbs([
+$provider = new OpenPublicMedia\OAuth2\Client\Provider\Pbs([
     'clientId'          => '{pbs-client-id}',
     'clientSecret'      => '{pbs-client-secret}',
     'redirectUri'       => 'https://example.com/callback-url',

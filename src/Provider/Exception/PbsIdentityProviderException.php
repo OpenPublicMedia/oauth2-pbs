@@ -1,6 +1,6 @@
 <?php
 
-namespace CascadePublicMedia\OAuth2\Client\Provider\Exception;
+namespace OpenPublicMedia\OAuth2\Client\Provider\Exception;
 
 use Psr\Http\Message\ResponseInterface;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;

@@ -2,7 +2,7 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-We accept contributions via Pull Requests on [Github](https://github.com/Cascade-Public-Media/oauth2-pbs).
+We accept contributions via Pull Requests on [Github](https://github.com/OpenPublicMedia/oauth2-pbs).
 
 
 ## Pull Requests

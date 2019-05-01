@@ -1,5 +1,5 @@
 {
-    "name": "cascadepublicmedia/oauth2-pbs",
+    "name": "openpublicmedia/oauth2-pbs",
     "description": "PBS OAuth 2.0 Client Provider for The PHP League OAuth2-Client",
     "license": "MIT",
     "authors": [
@@ -27,12 +27,12 @@
     },
     "autoload": {
         "psr-4": {
-            "CascadePublicMedia\\OAuth2\\Client\\": "src/"
+            "OpenPublicMedia\\OAuth2\\Client\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "CascadePublicMedia\\OAuth2\\Client\\Test\\": "test/src/"
+            "OpenPublicMedia\\OAuth2\\Client\\Test\\": "test/src/"
         }
     }
 }

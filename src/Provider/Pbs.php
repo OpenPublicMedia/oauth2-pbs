@@ -1,8 +1,8 @@
 <?php
 
-namespace CascadePublicMedia\OAuth2\Client\Provider;
+namespace OpenPublicMedia\OAuth2\Client\Provider;
 
-use CascadePublicMedia\OAuth2\Client\Provider\Exception\PbsIdentityProviderException;
+use OpenPublicMedia\OAuth2\Client\Provider\Exception\PbsIdentityProviderException;
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;

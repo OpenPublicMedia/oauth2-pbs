@@ -1,8 +1,8 @@
 <?php
 
-namespace CascadePublicMedia\OAuth2\Client\Test\Provider;
+namespace OpenPublicMedia\OAuth2\Client\Test\Provider;
 
-use CascadePublicMedia\OAuth2\Client\Provider\Pbs;
+use OpenPublicMedia\OAuth2\Client\Provider\Pbs;
 use League\OAuth2\Client\Tool\QueryBuilderTrait;
 use Mockery as m;
 
