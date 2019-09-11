@@ -11,3 +11,6 @@ composer.lock
 
 # MacOS
 .DS_Store
+
+# PHPUnit
+.phpunit.result.cache

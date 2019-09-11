@@ -2,11 +2,12 @@
 
 namespace OpenPublicMedia\OAuth2\Client\Test\Provider;
 
-use OpenPublicMedia\OAuth2\Client\Provider\Pbs;
 use League\OAuth2\Client\Tool\QueryBuilderTrait;
 use Mockery as m;
+use OpenPublicMedia\OAuth2\Client\Provider\Pbs;
+use PHPUnit\Framework\TestCase;
 
-class PbsTest extends \PHPUnit_Framework_TestCase
+class PbsTest extends TestCase
 {
     use QueryBuilderTrait;
 
@@ -15,7 +16,7 @@ class PbsTest extends \PHPUnit_Framework_TestCase
      */
     protected $provider;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->provider = new Pbs([
             'clientId' => 'mock_client_id',
@@ -24,7 +25,7 @@ class PbsTest extends \PHPUnit_Framework_TestCase
         ]);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
         parent::tearDown();
