@@ -67,7 +67,8 @@ class PbsTest extends TestCase
     public function testGetAccessToken()
     {
         $response = m::mock('Psr\Http\Message\ResponseInterface');
-        $response->shouldReceive('getBody')->andReturn('{"access_token":"mock_access_token", "scope":"account vppa", "token_type":"bearer"}');
+        $response->shouldReceive('getBody')
+            ->andReturn('{"access_token":"mock_access_token", "scope":"account vppa", "token_type":"bearer"}');
         $response->shouldReceive('getHeader')->andReturn(['content-type' => 'json']);
         $response->shouldReceive('getStatusCode')->andReturn(200);
 
