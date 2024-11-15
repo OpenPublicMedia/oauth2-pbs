@@ -29,14 +29,15 @@ We accept contributions via Pull Requests on [Github](https://github.com/OpenPub
 ## Running Tests
 
 ``` bash
-$ ./vendor/bin/phpunit
+./vendor/bin/phpunit
 ```
 
 
 ## Running PHP Code Sniffer
 
 ``` bash
-$ ./vendor/bin/phpcs src --standard=psr2 -sp
+./vendor/bin/phpcs --config-set installed_paths vendor/phpcompatibility/php-compatibility
+./vendor/bin/phpcs
 ```
 
 **Happy coding**!

@@ -33,7 +33,7 @@ class PbsResourceOwner implements ResourceOwnerInterface
      */
     public function getId()
     {
-        return $this->getValueByKey($this->response, 'pid');
+        return $this->getValueByKey($this->response, 'sub');
     }
 
     /**
@@ -47,13 +47,23 @@ class PbsResourceOwner implements ResourceOwnerInterface
     }
 
     /**
+     * Whether the resource owner email has been verified.
+     *
+     * @return boolean
+     */
+    public function isEmailVerified()
+    {
+        return $this->getValueByKey($this->response, 'email_verified', false);
+    }
+
+    /**
      * Get resource owner first name.
      *
      * @return string|null
      */
     public function getFirstName()
     {
-        return $this->getValueByKey($this->response, 'first_name');
+        return $this->getValueByKey($this->response, 'given_name');
     }
 
     /**
@@ -63,7 +73,7 @@ class PbsResourceOwner implements ResourceOwnerInterface
      */
     public function getLastName()
     {
-        return $this->getValueByKey($this->response, 'last_name');
+        return $this->getValueByKey($this->response, 'family_name');
     }
 
     /**
@@ -86,62 +96,6 @@ class PbsResourceOwner implements ResourceOwnerInterface
         }
 
         return $name;
-    }
-
-    /**
-     * Get resource owner analytics ID.
-     *
-     * @return string|null
-     */
-    public function getAnalyticsId()
-    {
-        return $this->getValueByKey($this->response, 'analytics_id');
-    }
-
-    /**
-     * Get resource owner thumbnail URL.
-     *
-     * @return string|null
-     */
-    public function getThumbnailUrl()
-    {
-        return $this->getValueByKey($this->response, 'thumbnail_URL');
-    }
-
-    /**
-     * Get resource owner VPPA status.
-     *
-     * @link https://docs.pbs.org/display/uua/VPPA
-     * @link https://docs.pbs.org/display/uua/VPPA+Developer+Guide
-     * @return string|null
-     */
-    public function getVppaStatus()
-    {
-        $vppa_status = 'unknown';
-        $vppa_accepted = $this->getValueByKey($this->response, 'vppa.vppa_accepted');
-        $vppa_last_updated = $this->getValueByKey($this->response, 'vppa.vppa_last_updated');
-
-        if (!$vppa_accepted) {
-            $vppa_status = 'rejected';
-        } elseif (!empty($vppa_last_updated)) {
-            $vppa_status = 'valid';
-
-            if (strtotime($vppa_last_updated) < strtotime('-2 years')) {
-                $vppa_status = 'expired';
-            }
-        }
-
-        return $vppa_status;
-    }
-
-    /**
-     * Get resource owner zip code.
-     *
-     * @return string|null
-     */
-    public function getZipCode()
-    {
-        return $this->getValueByKey($this->response, 'zip_code');
     }
 
     /**

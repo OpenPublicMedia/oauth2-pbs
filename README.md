@@ -1,12 +1,16 @@
-# PBS Provider for OAuth 2.0 Client
+# PBS Provider for Public Media SSO Client
 
-This package provides PBS OAuth 2.0 support for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
+This package provides Public Media SSO support for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
+
+## Legacy PBS OAuth 2.0
+
+For legacy PBS OAuth 2.0 support, use a 1.x versions of this library.
 
 ## Installation
 
 To install, use composer:
 
-```
+```shell
 composer require openpublicmedia/oauth2-pbs
 ```
 
@@ -19,7 +23,7 @@ Usage is the same as The League's OAuth client, using `OpenPublicMedia\OAuth2\Cl
 ```php
 $provider = new OpenPublicMedia\OAuth2\Client\Provider\Pbs([
     'clientId'          => '{pbs-client-id}',
-    'clientSecret'      => '{pbs-client-secret}',
+    'customerId'        => '{pbs-customer-id}',
     'redirectUri'       => 'https://example.com/callback-url',
 ]);
 
@@ -28,6 +32,10 @@ if (!isset($_GET['code'])) {
     // If we don't have an authorization code then get one
     $authUrl = $provider->getAuthorizationUrl();
     $_SESSION['oauth2state'] = $provider->getState();
+
+    // Add PKCE code to session.
+    $_SESSION['oauth2pkceCode'] = $provider->getPkceCode();
+
     header('Location: '.$authUrl);
     exit;
 
@@ -38,6 +46,9 @@ if (!isset($_GET['code'])) {
     exit('Invalid state');
 
 } else {
+
+    // Restore the PKCE code stored in the session.
+    $provider->setPkceCode($_SESSION['oauth2pkceCode']);
 
     // Try to get an access token (using the authorization code grant)
     $token = $provider->getAccessToken('authorization_code', [
@@ -64,23 +75,17 @@ if (!isset($_GET['code'])) {
 }
 ```
 
-## Testing
-
-``` bash
-$ ./vendor/bin/phpunit
-```
-
 ## Contributing
 
-Please see [CONTRIBUTING](https://github.com/cascade-public-media/oauth2-pbs/blob/master/CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 
 ## Credits
 
-- [Christopher C. Wells](https://chrxs.net)
-- [All Contributors](https://github.com/cascade-public-media/oauth2-pbs/contributors)
+- [Christopher C. Wells](https://www.chris-wells.net)
+- [All Contributors](https://github.com/openpublicmedia/oauth2-pbs/graphs/contributors)
 
 
 ## License
 
-The MIT License (MIT). Please see [License File](https://github.com/cascade-public-media/oauth2-pbs/blob/master/LICENSE) for more information.
+The MIT License (MIT). Please see [License File](LICENSE) for more information.

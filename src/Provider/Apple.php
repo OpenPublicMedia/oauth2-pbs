@@ -5,12 +5,14 @@ namespace OpenPublicMedia\OAuth2\Client\Provider;
 class Apple extends Pbs
 {
     /**
-     * Get authorization url to begin OAuth flow.
-     *
-     * @return string
+     * {@inheritDoc}
      */
-    public function getBaseAuthorizationUrl()
+    protected function getAuthorizationParameters(array $options)
     {
-        return $this->domain . '/oauth2/social/login/apple';
+        return parent::getAuthorizationParameters($options + [
+            'backend' => 'apple',
+            'prompt' => 'login',
+            'show_social_signin' => 'on',
+        ]);
     }
 }

@@ -10,7 +10,7 @@ class GoogleTest extends PbsTest
     {
         $this->provider = new Google([
             'clientId' => 'mock_client_id',
-            'clientSecret' => 'mock_secret',
+            'customerId' => 'mock_customer_id',
             'redirectUri' => 'none',
         ]);
     }
@@ -19,7 +19,16 @@ class GoogleTest extends PbsTest
     {
         $url = $this->provider->getAuthorizationUrl();
         $uri = parse_url($url);
+        parse_str($uri['query'], $query);
 
-        $this->assertEquals('/oauth2/social/login/google-oauth2', $uri['path']);
+        $this->assertEquals('/mock_customer_id/login/authorize', $uri['path']);
+
+        $this->assertArrayHasKey('backend', $query);
+        $this->assertArrayHasKey('prompt', $query);
+        $this->assertArrayHasKey('show_social_signin', $query);
+
+        $this->assertEquals('google-oauth2', $query['backend']);
+        $this->assertEquals('login', $query['prompt']);
+        $this->assertEquals('on', $query['show_social_signin']);
     }
 }

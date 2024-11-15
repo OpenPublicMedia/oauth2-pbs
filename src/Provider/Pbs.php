@@ -13,68 +13,18 @@ class Pbs extends AbstractProvider
     use BearerAuthorizationTrait;
 
     /**
-     * {@inheritDoc}
-     *
-     * @see \League\OAuth2\Client\Provider\AbstractProvider::ACCESS_TOKEN_RESOURCE_OWNER_ID
-     */
-    const ACCESS_TOKEN_RESOURCE_OWNER_ID = 'pid';
-
-    /**
      * Domain.
      *
      * @var string
      */
-    public $domain = 'https://account.pbs.org';
+    public $domain = 'https://login.publicmediasignin.org';
 
     /**
-     * Get authorization url to begin OAuth flow.
+     * Customer ID.
      *
-     * @return string
+     * @var string
      */
-    public function getBaseAuthorizationUrl()
-    {
-        return $this->domain . '/oauth2/authorize';
-    }
-
-    /**
-     * Get access token url to retrieve token.
-     *
-     * @param  array $params
-     *
-     * @return string
-     */
-    public function getBaseAccessTokenUrl(array $params)
-    {
-        return $this->domain . '/oauth2/token/';
-    }
-
-    /**
-     * Get provider url to fetch user details.
-     *
-     * @param  AccessToken $token
-     *
-     * @return string
-     */
-    public function getResourceOwnerDetailsUrl(AccessToken $token)
-    {
-        return $this->domain . '/oauth2/user/info/';
-    }
-
-    /**
-     * Get the default scopes used by this provider.
-     *
-     * This should not be a complete list of all scopes, but the minimum
-     * required for the provider user interface!
-     *
-     * @return array
-     */
-    protected function getDefaultScopes()
-    {
-        return [
-            'account',
-            'vppa',
-        ];
-    }
+    protected $customerId;
 
     /**
      * Check a provider response for errors.
@@ -103,5 +53,108 @@ class Pbs extends AbstractProvider
     protected function createResourceOwner(array $response, AccessToken $token)
     {
         return new PbsResourceOwner($response);
+    }
+
+    /**
+     * Get authorization url to begin OAuth flow.
+     *
+     * @return string
+     */
+    public function getBaseAuthorizationUrl()
+    {
+        return $this->domain . '/' . $this->customerId . '/login/authorize';
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function getAuthorizationParameters(array $options)
+    {
+        $options = parent::getAuthorizationParameters($options);
+        $options['backend'] = $options['backend'] ?? 'traditional';
+        $options['response_mode'] = $options['response_mode'] ?? 'query';
+        $options['show_social_signin'] = $options['show_social_signin'] ?? 'off';
+        return $options;
+    }
+
+    /**
+     * Get access token url to retrieve token.
+     *
+     * @param  array $params
+     *
+     * @return string
+     */
+    public function getBaseAccessTokenUrl(array $params)
+    {
+        return $this->domain . '/' . $this->customerId . '/login/token';
+    }
+
+    /**
+     * Gets customer ID.
+     *
+     * @return string
+     */
+    public function getCustomerId()
+    {
+        return $this->customerId;
+    }
+
+        /**
+     * Get the default scopes used by this provider.
+     *
+     * This should not be a complete list of all scopes, but the minimum
+     * required for the provider user interface!
+     *
+     * @return array
+     */
+    protected function getDefaultScopes()
+    {
+        return [
+            'openid',
+            'profile',
+            'email',
+        ];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function getPkceMethod()
+    {
+        return self::PKCE_METHOD_S256;
+    }
+
+    /**
+     * Get provider url to fetch user details.
+     *
+     * @param  AccessToken $token
+     *
+     * @return string
+     */
+    public function getResourceOwnerDetailsUrl(AccessToken $token)
+    {
+        return $this->domain . '/' . $this->customerId . '/profiles/oidc/userinfo';
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function getScopeSeparator()
+    {
+        return ' ';
+    }
+
+    /**
+     * Sets customer ID.
+     *
+     * @param string $host
+     *
+     * @return self
+     */
+    public function setCustomerId($customerId)
+    {
+        $this->customerId = $customerId;
+
+        return $this;
     }
 }
